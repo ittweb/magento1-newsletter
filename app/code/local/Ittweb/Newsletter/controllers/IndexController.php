@@ -16,14 +16,14 @@ class Ittweb_Newsletter_IndexController extends Mage_Core_Controller_Front_Actio
   {
     $jsonReceived = json_decode(file_get_contents('php://input'), true);
     if (json_last_error() !== JSON_ERROR_NONE) {
-      $this->setResponse(500, "JSON mal formattato: $jsonReceived");
+      $this->setResponse(500, "JSON error: $jsonReceived");
     }
 
     try {
       Mage::getModel('newsletter/subscriber')->subscribe($jsonReceived['email']);
-      return $this->setResponse(200, 'Iscritto correttamente');
+      return $this->setResponse(200, 'Subscribed correctly');
     } catch (Exception $e) {
-      return $this->setResponse(500, 'Errore in fase di iscrizione: verifica i log', $e);
+      return $this->setResponse(500, 'Error on the subscription: please check the log', $e);
     }
   }
 
@@ -31,14 +31,14 @@ class Ittweb_Newsletter_IndexController extends Mage_Core_Controller_Front_Actio
   {
     $jsonReceived = json_decode(file_get_contents('php://input'), true);
     if (json_last_error() !== JSON_ERROR_NONE) {
-      $this->setResponse(500, "JSON mal formattato: $jsonReceived");
+      $this->setResponse(500, "JSON error: $jsonReceived");
     }
 
     $subscriber = Mage::getModel('newsletter/subscriber')->loadByEmail($jsonReceived['email']);
     if ($subscriber->getStatus() === '1') {
       return $this->setResponse(200, 'Ok');
     } else {
-      return $this->setResponse(501, 'Email non presente');
+      return $this->setResponse(501, 'Email is not subscribed');
     }
   }
 
@@ -46,14 +46,14 @@ class Ittweb_Newsletter_IndexController extends Mage_Core_Controller_Front_Actio
   {
     $jsonReceived = json_decode(file_get_contents('php://input'), true);
     if (json_last_error() !== JSON_ERROR_NONE) {
-      $this->setResponse(500, "JSON mal formattato: $jsonReceived");
+      $this->setResponse(500, "JSON error: $jsonReceived");
     }
 
     try {
       Mage::getModel('newsletter/subscriber')->loadByEmail($jsonReceived['email'])->unsubscribe();
-      return $this->setResponse(200, 'Disiscritto correttamente');
+      return $this->setResponse(200, 'Unsubscribed correctly');
     } catch (Exception $e) {
-      return $this->setResponse(500, 'Errore in fase di disiscrizione: verifica i log', $e);
+      return $this->setResponse(500, 'Error on unsubscribe: please check the log', $e);
     }
   }
 }
