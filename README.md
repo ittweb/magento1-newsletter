@@ -1,21 +1,24 @@
 # Magento 1 Newsletter API
-## Modulo per Vue Storefront 1.x
+## Module for Vue Storefront 1.x
 
-Questo modulo nasce per integrare la funzionalità della newsletter di Vue Storefront con Magento 1.
-Ciò non toglie che possa essere usato anche per altri scopi, dal momento che questa API è agnostica e sganciata da VSF.
+This module gives the ability to connect the Magento 1 newsletter with Vue Storefront.
 
-### Struttura endpoint
-Gli endpoint che vengono creati sono tutti formati così: `/ittweb_newsletter/index/NOME_METODO`.
+## IMPORTANT
 
-Ai vari endpoint va passato il parametro `email`, come BODY in formato JSON.
+To work correctly this module needs the installation of the module for the [Vue Storefront API](https://github.com/ittweb/vsfapi-magento1-newsletter)
 
-### Metodi a disposizione
+### API Endpoint
+The structure for all the endpoints is: `/ittweb_newsletter/index/METHOD_NAME`.
 
-check => restituisce 200 se l'utente è iscritto, 501 in caso negativo
+The `email` parameter is always request, as a BODY in JSON format.
 
-subscribe => restituisce 500 se l'operazione fallisce
+### Methods name
 
-unsubscribe => come sopra
+check => returns 200 if the user is subscribed, 501 otherwise
 
-## Modulo per Magento 2
-Il modulo equivalente per Magento 2, sempre realizzato da ITTweb, è disponibile su [GitHub](https://github.com/ittweb/magento2-newsletter-api). Il relativo "aggancio" tra Magento 2 e VSF-API è anch'esso presente su [GitHub](https://github.com/ittweb/vsfapi-magento2-newsletter).
+subscribe => returns 500 if the operation fail
+
+unsubscribe => like above
+
+## Module for Magento 2
+The same module for Magento 2 is available on [GitHub](https://github.com/ittweb/magento2-newsletter-api). Also the "bridge" between Magento 2 and VSF-API is on [GitHub](https://github.com/ittweb/vsfapi-magento2-newsletter).
